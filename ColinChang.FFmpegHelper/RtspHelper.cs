@@ -54,9 +54,23 @@ namespace ColinChang.FFmpegHelper
             return await FFmpegHelper.ExecuteFfmpegAsync(_rtsp, outputFile, beforeInput, beforeOutput);
         }
 
+        /// <summary>
+        /// Screenshot once
+        /// </summary>
+        /// <param name="outputFile"></param>
+        /// <returns></returns>
         public async Task<bool> ScreenshotAsync(string outputFile) =>
             await FFmpegHelper.ScreenshotAsync(_rtsp, outputFile);
 
+        /// <summary>
+        /// Screenshot by a timer
+        /// </summary>
+        /// <param name="outputDirectory"></param>
+        /// <param name="filenamePrefix">filename prefix of screenshot picture</param>
+        /// <param name="interval">how often(seconds) to exec a screenshot.</param>
+        /// <param name="duration">how long time will this run</param>
+        /// <param name="format">screenshot picture format</param>
+        /// <returns></returns>
         public async Task<bool> ScreenshotAsync(string outputDirectory, string filenamePrefix,
             int interval, TimeSpan duration,
             ImageFormat format = ImageFormat.JPG

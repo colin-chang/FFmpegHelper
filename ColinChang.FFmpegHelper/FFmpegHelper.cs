@@ -10,15 +10,32 @@ namespace ColinChang.FFmpegHelper
 {
     public static class FFmpegHelper
     {
+        /// <summary>
+        /// Screenshot once
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="output"></param>
+        /// <param name="timeOffset">set the start time offset</param>
+        /// <returns></returns>
         public static async Task<bool> ScreenshotAsync(string input, string output, TimeSpan? timeOffset = null)
         {
-            var beforeOutput = new Dictionary<string, string> { ["-vframes"] = "1" };
+            var beforeOutput = new Dictionary<string, string> {["-vframes"] = "1"};
             if (timeOffset != null)
                 beforeOutput["-ss"] = timeOffset.ToString();
             return await ExecuteFfmpegAsync(input, output, null, beforeOutput);
         }
 
-
+        /// <summary>
+        /// Screenshot by a timer
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="outputDirectory"></param>
+        /// <param name="filenamePrefix">filename prefix of screenshot picture</param>
+        /// <param name="interval">how often(seconds) to exec a screenshot.</param>
+        /// <param name="duration">how long time will this run</param>
+        /// <param name="format">screenshot picture format</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">timer value isn't greater less than 0</exception>
         public static async Task<bool> ScreenshotAsync(string input, string outputDirectory, string filenamePrefix,
             int interval,
             TimeSpan? duration = null,
@@ -26,9 +43,9 @@ namespace ColinChang.FFmpegHelper
         )
         {
             if (interval <= 0)
-                throw new ArgumentException("timer value must greater than 0");
+                throw new ArgumentException("timer value must be greater than 0");
 
-            var beforeOutput = new Dictionary<string, string> { ["-vf"] = $"fps=1/{interval}" };
+            var beforeOutput = new Dictionary<string, string> {["-vf"] = $"fps=1/{interval}"};
             if (duration != null)
                 beforeOutput["-t"] = duration.ToString();
             return await ExecuteFfmpegAsync(input,
@@ -58,7 +75,7 @@ namespace ColinChang.FFmpegHelper
             var outputParameters = beforeOutput == null || !beforeOutput.Any()
                 ? "$$"
                 : $"\"{string.Join(" ", beforeOutput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
-            
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 return Task.Run(() => ShellHelper.ShellHelper.Execute("ffmpeg.bat",
