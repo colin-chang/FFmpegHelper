@@ -1,1 +1,1 @@
-# FFmpegHelper
+This is a common utility that can help you to run most of ffmpeg commands.It contains a RTSP helper that can recorder a video from RTSP stream.Plus it can use watermark and screenshot.Windows(x64,x86) and macOS are supported currently,Linux will be supported soon.
