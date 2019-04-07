@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColinChang.FFmpegHelper", "ColinChang.FFmpegHelper\ColinChang.FFmpegHelper.csproj", "{A633E0F6-4788-4859-88BE-E63C05664E0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColinChang.FFmpegHelper.Sample", "ColinChang.FFmpegHelper.Sample\ColinChang.FFmpegHelper.Sample.csproj", "{12A514F2-3FB3-4FBB-98E0-85ACC7A23A7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A633E0F6-4788-4859-88BE-E63C05664E0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A633E0F6-4788-4859-88BE-E63C05664E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A633E0F6-4788-4859-88BE-E63C05664E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A633E0F6-4788-4859-88BE-E63C05664E0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12A514F2-3FB3-4FBB-98E0-85ACC7A23A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12A514F2-3FB3-4FBB-98E0-85ACC7A23A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12A514F2-3FB3-4FBB-98E0-85ACC7A23A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12A514F2-3FB3-4FBB-98E0-85ACC7A23A7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
