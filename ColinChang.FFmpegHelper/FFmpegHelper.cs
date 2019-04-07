@@ -52,15 +52,15 @@ namespace ColinChang.FFmpegHelper
             if (string.IsNullOrWhiteSpace(input) || string.IsNullOrWhiteSpace(output))
                 throw new ArgumentException("input or output cannot be null or empty");
 
+            var inputParameters = beforeInput == null || !beforeInput.Any()
+                ? "$$"
+                : $"\"{string.Join(" ", beforeInput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
+            var outputParameters = beforeOutput == null || !beforeOutput.Any()
+                ? "$$"
+                : $"\"{string.Join(" ", beforeOutput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
+            
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                var inputParameters = beforeInput == null || !beforeInput.Any()
-                    ? "$$"
-                    : $"\"{string.Join(" ", beforeInput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
-                var outputParameters = beforeOutput == null || !beforeOutput.Any()
-                    ? "$$"
-                    : $"\"{string.Join(" ", beforeOutput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
-
                 return Task.Run(() => ShellHelper.ShellHelper.Execute("ffmpeg.bat",
                     $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.1.1", Environment.Is64BitOperatingSystem ? "win64" : "win32")} {inputParameters} {input} {outputParameters} {output}",
                     true));
@@ -70,15 +70,8 @@ namespace ColinChang.FFmpegHelper
                 if (!Environment.Is64BitOperatingSystem)
                     throw new NotSupportedException("only 64bit macOS is supported");
 
-                var inputParameters = beforeInput == null || !beforeInput.Any()
-                    ? string.Empty
-                    : $"-b \"{string.Join(" ", beforeInput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
-                var outputParameters = beforeOutput == null || !beforeOutput.Any()
-                    ? string.Empty
-                    : $"-d \"{string.Join(" ", beforeOutput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
-
                 return Task.Run(() => ShellHelper.ShellHelper.Execute("ffmpeg.sh",
-                    $"-a {Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.1.1", "macos64")} {inputParameters} -c {input} {outputParameters} -e {output}",
+                    $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.1.1", "macos64")} {inputParameters} {input} {outputParameters} {output}",
                     true));
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))

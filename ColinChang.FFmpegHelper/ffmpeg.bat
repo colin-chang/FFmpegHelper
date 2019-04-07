@@ -1,8 +1,11 @@
 @echo off
 
-cd $1
-echo $1
+cd %1
+set s=%2 -i %3 %4 %5
+set s=%s:$$=%
+set s=%s:"=%
+set s=%s:'="%
+echo %s%
+ffmpeg %s%
 
-
-% echo ./ffmpeg $2 -i $3 $4 $5 %
-% ./ffmpeg $2 -i $3 $4 $5 %
+echo %errorlevel%

@@ -12,8 +12,8 @@ namespace ColinChang.FFmpegHelper.Sample
         static void Main(string[] args)
         {
             //RecordAsync();
-            //WatermarkAsync();
-            ScreenshotAsync();
+            WatermarkAsync();
+            //ScreenshotAsync();
             Console.ReadKey();
         }
 
