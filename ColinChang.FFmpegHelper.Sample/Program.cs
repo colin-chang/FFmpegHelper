@@ -11,9 +11,9 @@ namespace ColinChang.FFmpegHelper.Sample
 
         static void Main(string[] args)
         {
-            RecordAsync();
+            //RecordAsync();
             //WatermarkAsync();
-            //ScreenshotAsync();
+            ScreenshotAsync();
             Console.ReadKey();
         }
 
@@ -22,6 +22,8 @@ namespace ColinChang.FFmpegHelper.Sample
             var output = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 ? @"C:\Temp\output.mp4"
                 : "/Users/zhangcheng/Desktop/output.mp4";
+
+            //await rtsp.Record2VideoFileAsync(output, TimeSpan.FromSeconds(2));
 
             await rtsp.Record2VideoFileAsync(
                 output,
@@ -33,16 +35,25 @@ namespace ColinChang.FFmpegHelper.Sample
 
         private static async void WatermarkAsync()
         {
+            var output = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? @"C:\Temp\output.mkv"
+                : "/Users/zhangcheng/Desktop/output.mkv";
+
             //rtsp.Watermark = new Watermark("logo.png", 30, 30);
             rtsp.Watermark = new Watermark("../../logo.png", 30, 30, Color.Black, 0.5f, 0.5f);
-            await rtsp.Record2VideoFileAsync("/Users/zhangcheng/Desktop/output.mkv", TimeSpan.FromSeconds(2));
+            await rtsp.Record2VideoFileAsync(output, TimeSpan.FromSeconds(2));
         }
 
         private static async void ScreenshotAsync()
         {
-            //await rtsp.ScreenshotAsync("/Users/zhangcheng/Desktop/ss.png");
+            var output = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? @"C:\Temp\"
+                : "/Users/zhangcheng/Desktop/";
 
-            await rtsp.ScreenshotAsync("/Users/zhangcheng/Desktop/", "colin_", 2, TimeSpan.FromSeconds(6));
+
+            //await rtsp.ScreenshotAsync($"{output}ss.png");
+
+            await rtsp.ScreenshotAsync(output, "colin_", 2, TimeSpan.FromSeconds(6));
         }
     }
 }

@@ -12,7 +12,7 @@ namespace ColinChang.FFmpegHelper
     {
         public static async Task<bool> ScreenshotAsync(string input, string output, TimeSpan? timeOffset = null)
         {
-            var beforeOutput = new Dictionary<string, string> {["-vframes"] = "1"};
+            var beforeOutput = new Dictionary<string, string> { ["-vframes"] = "1" };
             if (timeOffset != null)
                 beforeOutput["-ss"] = timeOffset.ToString();
             return await ExecuteFfmpegAsync(input, output, null, beforeOutput);
@@ -28,7 +28,7 @@ namespace ColinChang.FFmpegHelper
             if (interval <= 0)
                 throw new ArgumentException("timer value must greater than 0");
 
-            var beforeOutput = new Dictionary<string, string> {["-vf"] = $"fps=1/{interval}"};
+            var beforeOutput = new Dictionary<string, string> { ["-vf"] = $"fps=1/{interval}" };
             if (duration != null)
                 beforeOutput["-t"] = duration.ToString();
             return await ExecuteFfmpegAsync(input,
@@ -52,34 +52,34 @@ namespace ColinChang.FFmpegHelper
             if (string.IsNullOrWhiteSpace(input) || string.IsNullOrWhiteSpace(output))
                 throw new ArgumentException("input or output cannot be null or empty");
 
-            var (ffmpeg, shell) = MapFFmpeg();
-            var inputParameters = beforeInput == null || !beforeInput.Any()
-                ? string.Empty
-                : $"-b \"{string.Join(" ", beforeInput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
-            var outputParameters = beforeOutput == null || !beforeOutput.Any()
-                ? string.Empty
-                : $"-d \"{string.Join(" ", beforeOutput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
-
-            return Task.Run(() => ShellHelper.ShellHelper.Execute(shell,
-                $"-a {ffmpeg} {inputParameters} -c {input} {outputParameters} -e {output}",
-                true));
-        }
-
-        private static (string ffmpeg, string shell) MapFFmpeg()
-        {
-            string os;
-            string shell;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                os = Environment.Is64BitOperatingSystem ? "win64" : "win32";
-                shell = "ffmpeg.bat";
+                var inputParameters = beforeInput == null || !beforeInput.Any()
+                    ? "$$"
+                    : $"\"{string.Join(" ", beforeInput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
+                var outputParameters = beforeOutput == null || !beforeOutput.Any()
+                    ? "$$"
+                    : $"\"{string.Join(" ", beforeOutput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
+
+                return Task.Run(() => ShellHelper.ShellHelper.Execute("ffmpeg.bat",
+                    $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.1.1", Environment.Is64BitOperatingSystem ? "win64" : "win32")} {inputParameters} {input} {outputParameters} {output}",
+                    true));
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
                 if (!Environment.Is64BitOperatingSystem)
                     throw new NotSupportedException("only 64bit macOS is supported");
-                os = "macos64";
-                shell = "ffmpeg.sh";
+
+                var inputParameters = beforeInput == null || !beforeInput.Any()
+                    ? string.Empty
+                    : $"-b \"{string.Join(" ", beforeInput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
+                var outputParameters = beforeOutput == null || !beforeOutput.Any()
+                    ? string.Empty
+                    : $"-d \"{string.Join(" ", beforeOutput.Select(kv => $"{kv.Key} {kv.Value}"))}\"";
+
+                return Task.Run(() => ShellHelper.ShellHelper.Execute("ffmpeg.sh",
+                    $"-a {Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.1.1", "macos64")} {inputParameters} -c {input} {outputParameters} -e {output}",
+                    true));
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
@@ -90,9 +90,6 @@ namespace ColinChang.FFmpegHelper
             {
                 throw new NotSupportedException($"unknown OS Platform {RuntimeInformation.OSDescription}");
             }
-
-
-            return (Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.1.1", os), shell);
         }
     }
 
