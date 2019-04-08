@@ -16,13 +16,16 @@ namespace ColinChang.FFmpegHelper
         /// <param name="input"></param>
         /// <param name="output"></param>
         /// <param name="timeOffset">set the start time offset</param>
+        /// <param name="timeout">count by millisecond</param>
         /// <returns></returns>
-        public static async Task<bool> ScreenshotAsync(string input, string output, TimeSpan? timeOffset = null)
+        public static async Task<bool> ScreenshotAsync(string input, string output, TimeSpan? timeOffset = null,
+            int timeout = -1)
         {
+            var beforeInput = timeout > 0 ? new Dictionary<string, string> {["-stimeout"] = $"{timeout * 1000}"} : null;
             var beforeOutput = new Dictionary<string, string> {["-vframes"] = "1"};
             if (timeOffset != null)
                 beforeOutput["-ss"] = timeOffset.ToString();
-            return await ExecuteFfmpegAsync(input, output, null, beforeOutput);
+            return await ExecuteFfmpegAsync(input, output, beforeInput, beforeOutput);
         }
 
         /// <summary>
@@ -38,18 +41,20 @@ namespace ColinChang.FFmpegHelper
         /// <exception cref="ArgumentException">timer value isn't greater less than 0</exception>
         public static async Task<bool> ScreenshotAsync(string input, string outputDirectory, string filenamePrefix,
             int interval,
-            TimeSpan? duration = null,
+            TimeSpan? duration = null, int timeout = -1,
             ImageFormat format = ImageFormat.JPG
         )
         {
             if (interval <= 0)
                 throw new ArgumentException("timer value must be greater than 0");
 
+            var beforeInput = timeout > 0 ? new Dictionary<string, string> {["-stimeout"] = $"{timeout * 1000}"} : null;
+
             var beforeOutput = new Dictionary<string, string> {["-vf"] = $"fps=1/{interval}"};
             if (duration != null)
                 beforeOutput["-t"] = duration.ToString();
             return await ExecuteFfmpegAsync(input,
-                Path.Combine(outputDirectory, $"{filenamePrefix}%d.{format.ToString().ToLower()}"), null,
+                Path.Combine(outputDirectory, $"{filenamePrefix}%d.{format.ToString().ToLower()}"), beforeInput,
                 beforeOutput);
         }
 
@@ -78,7 +83,7 @@ namespace ColinChang.FFmpegHelper
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                return Task.Run(() => ShellHelper.ShellHelper.Execute("ffmpeg.bat",
+                return Task.Run(() => ShellHelper.ShellHelper.ExecuteFile("ffmpeg.bat",
                     $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.1.1", Environment.Is64BitOperatingSystem ? "win64" : "win32")} {inputParameters} {input} {outputParameters} {output}",
                     true));
             }
@@ -87,7 +92,7 @@ namespace ColinChang.FFmpegHelper
                 if (!Environment.Is64BitOperatingSystem)
                     throw new NotSupportedException("only 64bit macOS is supported");
 
-                return Task.Run(() => ShellHelper.ShellHelper.Execute("ffmpeg.sh",
+                return Task.Run(() => ShellHelper.ShellHelper.ExecuteFile("ffmpeg.sh",
                     $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.1.1", "macos64")} {inputParameters} {input} {outputParameters} {output}",
                     true));
             }

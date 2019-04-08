@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ColinChang.ShellHelper" Version="1.0.0" />
+    <PackageReference Include="ColinChang.ShellHelper" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>

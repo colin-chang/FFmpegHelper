@@ -7,5 +7,3 @@ set s=%s:"=%
 set s=%s:'="%
 echo %s%
 ffmpeg %s%
-
-echo %errorlevel%

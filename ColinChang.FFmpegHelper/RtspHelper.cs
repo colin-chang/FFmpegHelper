@@ -8,13 +8,23 @@ namespace ColinChang.FFmpegHelper
 {
     public class RtspHelper
     {
-        private readonly string _rtsp;
+        public string Rtsp { get; set; }
+
+        /// <summary>
+        /// set time for rtsp connection,count by millisecond
+        /// </summary>
+        public int Timeout { get; set; } = -1;
 
         public RtspHelper(string rtsp)
         {
             if (!rtsp.Trim().ToLower().StartsWith("rtsp://"))
                 throw new ArgumentException("invalid rtsp address");
-            _rtsp = rtsp;
+            Rtsp = rtsp;
+        }
+
+        public RtspHelper(string rtsp, int timeout) : this(rtsp)
+        {
+            Timeout = timeout;
         }
 
         /// <summary>
@@ -44,6 +54,8 @@ namespace ColinChang.FFmpegHelper
                 beforeInput["-rtsp_transport"] = transport.ToString().ToLower();
             if (allowedMediaTypes != AllowedMediaTypes.All)
                 beforeInput["-allowed_media_types"] = allowedMediaTypes.ToString().ToLower();
+            if (Timeout > 0)
+                beforeInput["-stimeout"] = $"{Timeout * 1000}";
 
             var beforeOutput = new Dictionary<string, string> {["-t"] = duration.ToString()};
             if (Watermark != null)
@@ -51,7 +63,7 @@ namespace ColinChang.FFmpegHelper
                     ? $"'movie={Watermark.Picture}[wm]; [in][wm]overlay={Watermark.X}:{Watermark.Y}[out]'"
                     : $"'movie={Watermark.Picture},colorkey=0x{Watermark.Color.ToArgb().ToString("X").Substring(2)}:{Watermark.Similarity}:{Watermark.Blend} [wm]; [in][wm]overlay={Watermark.X}:{Watermark.Y}[out]'";
 
-            return await FFmpegHelper.ExecuteFfmpegAsync(_rtsp, outputFile, beforeInput, beforeOutput);
+            return await FFmpegHelper.ExecuteFfmpegAsync(Rtsp, outputFile, beforeInput, beforeOutput);
         }
 
         /// <summary>
@@ -60,7 +72,7 @@ namespace ColinChang.FFmpegHelper
         /// <param name="outputFile"></param>
         /// <returns></returns>
         public async Task<bool> ScreenshotAsync(string outputFile) =>
-            await FFmpegHelper.ScreenshotAsync(_rtsp, outputFile);
+            await FFmpegHelper.ScreenshotAsync(Rtsp, outputFile, timeout: Timeout);
 
         /// <summary>
         /// Screenshot by a timer
@@ -75,7 +87,8 @@ namespace ColinChang.FFmpegHelper
             int interval, TimeSpan duration,
             ImageFormat format = ImageFormat.JPG
         ) =>
-            await FFmpegHelper.ScreenshotAsync(_rtsp, outputDirectory, filenamePrefix, interval, duration, format);
+            await FFmpegHelper.ScreenshotAsync(Rtsp, outputDirectory, filenamePrefix, interval, duration, Timeout,
+                format);
     }
 
     public enum Transport

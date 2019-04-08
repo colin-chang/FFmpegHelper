@@ -2,22 +2,23 @@
 using System.Data;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace ColinChang.FFmpegHelper.Sample
 {
     class Program
     {
-        static RtspHelper rtsp = new RtspHelper("rtsp://admin:12345qwert@192.168.0.109:554/h264/ch1/main/av_stream");
+        static RtspHelper rtsp =
+            new RtspHelper("rtsp://admin:12345qwert@192.168.0.109:554/h264/ch1/main/av_stream", 3000);
 
         static void Main(string[] args)
         {
-            //RecordAsync();
-            WatermarkAsync();
-            //ScreenshotAsync();
-            Console.ReadKey();
+//            RecordAsync();
+            WatermarkAsync().Wait();
+//            ScreenshotAsync().Wait();
         }
 
-        private static async void RecordAsync()
+        private static async Task RecordAsync()
         {
             var output = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 ? @"C:\Temp\output.mp4"
@@ -33,7 +34,7 @@ namespace ColinChang.FFmpegHelper.Sample
             );
         }
 
-        private static async void WatermarkAsync()
+        private static async Task WatermarkAsync()
         {
             var output = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 ? @"C:\Temp\output.mkv"
@@ -44,7 +45,7 @@ namespace ColinChang.FFmpegHelper.Sample
             await rtsp.Record2VideoFileAsync(output, TimeSpan.FromSeconds(2));
         }
 
-        private static async void ScreenshotAsync()
+        private static async Task ScreenshotAsync()
         {
             var output = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 ? @"C:\Temp\"
@@ -53,7 +54,15 @@ namespace ColinChang.FFmpegHelper.Sample
 
             //await rtsp.ScreenshotAsync($"{output}ss.png");
 
-            await rtsp.ScreenshotAsync(output, "colin_", 2, TimeSpan.FromSeconds(6));
+            try
+            {
+                await rtsp.ScreenshotAsync(output, "colin_", 2, TimeSpan.FromSeconds(10));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("*************************************************************");
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
