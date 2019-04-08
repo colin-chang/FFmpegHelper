@@ -10,8 +10,14 @@
     <RepositoryUrl>https://github.com/colin-chang/FFmpegHelper</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>FFmpeg RSTP screenshot watermark ffmpeg</PackageTags>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/colin-chang/FFmpegHelper/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <Owners>Colin Chang</Owners>
+    <Version>1.2.0</Version>
+    <PackageReleaseNotes>1.Add a timeout parameter in RtspHelper
+2.Export the Rtsp proerty of RtspHelper
+3.Make the retrun value of RtspHelper and FFmpegHelper are meaningful.
+4.Update ShellHelper to newest version</PackageReleaseNotes>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -125,5 +131,12 @@
     <Content Include="ffmpeg_v4.1.1\win64\swscale-5.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 </Project>
