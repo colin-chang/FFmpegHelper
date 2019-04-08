@@ -29,7 +29,7 @@ This package is based on FFmpeg v4.4.1.Resources under [ffmpeg_v4.1.1](ffmpeg_v4
 Since Linux has so many different version branches,we don't support it yet.FFmpeg provides built packages for Debian/Ubuntu/Fedora and Redhat only.For other versions and custom requirements,you can build FFmpeg from its source code.So here we don't provide linux support.
 but we will handle it soon.
 
-If you wanna extend Linux support,just edit [this place](https://github.com/colin-chang/FFmpegHelper/blob/master/ColinChang.FFmpegHelper/FFmpegHelper.cs#L96)
+If you wanna extend Linux support,just edit [this place](https://github.com/colin-chang/FFmpegHelper/blob/master/ColinChang.FFmpegHelper/FFmpegHelper.cs#L96).
 
 ## Principle
 We just packaged a library to transfer command to FFmpeg CLI.It's useful and simiple,except this,you also can use the FFmpeg API to use it for development.FFmpeg SDK only provide for baisc language like C.
