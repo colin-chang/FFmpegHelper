@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -36,6 +37,7 @@ namespace ColinChang.FFmpegHelper
         /// <param name="filenamePrefix">filename prefix of screenshot picture</param>
         /// <param name="interval">how often(seconds) to exec a screenshot.</param>
         /// <param name="duration">how long time will this run</param>
+        /// <param name="timeout">count by millisecond</param>
         /// <param name="format">screenshot picture format</param>
         /// <returns></returns>
         /// <exception cref="ArgumentException">timer value isn't greater less than 0</exception>
@@ -56,6 +58,30 @@ namespace ColinChang.FFmpegHelper
             return await ExecuteFfmpegAsync(input,
                 Path.Combine(outputDirectory, $"{filenamePrefix}%d.{format.ToString().ToLower()}"), beforeInput,
                 beforeOutput);
+        }
+
+        /// <summary>
+        /// watermark a video
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="output"></param>
+        /// <param name="watermark"></param>
+        /// <param name="beforeInput"></param>
+        /// <param name="beforeOutput"></param>
+        /// <returns></returns>
+        public static async Task<bool> WatermarkVideo(string input, string output, Watermark watermark,
+            Dictionary<string, string> beforeInput = null,
+            Dictionary<string, string> beforeOutput = null)
+        {
+            if (watermark != null)
+            {
+                beforeOutput = beforeOutput ?? new Dictionary<string, string>();
+                beforeOutput["-vf"] = watermark.Color == Color.Empty
+                    ? $"'movie={watermark.Picture}[wm]; [in][wm]overlay={watermark.X}:{watermark.Y}[out]'"
+                    : $"'movie={watermark.Picture},colorkey=0x{watermark.Color.ToArgb().ToString("X").Substring(2)}:{watermark.Similarity}:{watermark.Blend} [wm]; [in][wm]overlay={watermark.X}:{watermark.Y}[out]'";
+            }
+
+            return await ExecuteFfmpegAsync(input, output, beforeInput, beforeOutput);
         }
 
         /// <summary>
@@ -106,12 +132,5 @@ namespace ColinChang.FFmpegHelper
                 throw new NotSupportedException($"unknown OS Platform {RuntimeInformation.OSDescription}");
             }
         }
-    }
-
-    public enum ImageFormat
-    {
-        JPG,
-        PNG,
-        BMP
     }
 }

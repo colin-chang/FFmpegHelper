@@ -13,9 +13,9 @@ namespace ColinChang.FFmpegHelper.Sample
 
         static void Main(string[] args)
         {
-//            RecordAsync();
-            WatermarkAsync().Wait();
-//            ScreenshotAsync().Wait();
+            //RecordAsync();
+            //WatermarkAsync().Wait();
+            //ScreenshotAsync().Wait();
         }
 
         private static async Task RecordAsync()
@@ -40,9 +40,9 @@ namespace ColinChang.FFmpegHelper.Sample
                 ? @"C:\Temp\output.mkv"
                 : "/Users/zhangcheng/Desktop/output.mkv";
 
-            //rtsp.Watermark = new Watermark("logo.png", 30, 30);
-            rtsp.Watermark = new Watermark("../../logo.png", 30, 30, Color.Black, 0.5f, 0.5f);
-            await rtsp.Record2VideoFileAsync(output, TimeSpan.FromSeconds(2));
+            //var watermark = new Watermark("logo.png", 30, 30);
+            var watermark = new Watermark("../../logo.png", 30, 30, Color.Black, 0.5f, 0.5f);
+            await rtsp.Record2VideoFileAsync(output, TimeSpan.FromSeconds(2), watermark: watermark);
         }
 
         private static async Task ScreenshotAsync()

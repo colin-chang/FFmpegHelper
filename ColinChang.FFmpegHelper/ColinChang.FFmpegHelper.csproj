@@ -12,11 +12,8 @@
     <PackageTags>FFmpeg RSTP screenshot watermark ffmpeg</PackageTags>
     <PackageLicenseUrl></PackageLicenseUrl>
     <Owners>Colin Chang</Owners>
-    <Version>1.2.0</Version>
-    <PackageReleaseNotes>1.Add a timeout parameter in RtspHelper
-2.Export the Rtsp proerty of RtspHelper
-3.Make the retrun value of RtspHelper and FFmpegHelper are meaningful.
-4.Update ShellHelper to newest version</PackageReleaseNotes>
+    <Version>1.2.1</Version>
+    <PackageReleaseNotes>1.Add watermark function for FFmpegHelper 2.Modify RecordVideo function of RtspHelper(add watermark parameter)</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
