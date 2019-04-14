@@ -12,7 +12,7 @@ Install-Package ColinChang.FFmpegHelper
 It's based on .net standard 2.0
 
 ## FFmpegHelper
-FFmpegHelper can run a common ffmpeg command with the formate.`ffmpeg [beforeinput options] -i input [beforeoutput options] output`.We provide 2 screenshot methods inside it as a sample,you can extend any other useful common methods like what we provide.
+FFmpegHelper can run a common ffmpeg command with the formate.`ffmpeg [beforeinput options] -i input [beforeoutput options] output`.We provide two screenshot and one watermark methods inside it as samples,you can extend any other useful common methods like what we provide.
 
 ## RtspHelper
 RtspHelper is a useful utility based on FFmpegHelper to work with RTSP stream.It provides 3 functions.
