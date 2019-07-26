@@ -1,4 +1,4 @@
-This is a common utility that can help you to run any ffmpeg commands.It contains a RTSP helper that can recorder a video from RTSP stream.
+This is a common utility that can help you to run any ffmpeg commands. It contains a RTSP helper that can recorder a video from RTSP stream.
 
 ## Nuget
 https://www.nuget.org/packages/ColinChang.FFmpegHelper/
@@ -12,10 +12,18 @@ Install-Package ColinChang.FFmpegHelper
 It's based on .net standard 2.0
 
 ## FFmpegHelper
-FFmpegHelper can run a common ffmpeg command with the formate.`ffmpeg [beforeinput options] -i input [beforeoutput options] output`.We provide two screenshot and one watermark methods inside it as samples,you can extend any other useful common methods like what we provide.
+FFmpegHelper can run a common ffmpeg command with the formate.`ffmpeg [beforeinput options] -i input [beforeoutput options] output`.We provide some methods inside as samples,you can extend any other useful common methods like what we provide.
+
+method|function
+:-|:-
+ScreenshotAsync|Screenshot
+WatermarkAsync|Watermark a video
+ConvertToAsync|Convert video format
+ExtractVideoAsync|Extract a segment from a video
+ReplaceBackgroundAsync|Replace the background of input file and overlay it on top of a static background
 
 ## RtspHelper
-RtspHelper is a useful utility based on FFmpegHelper to work with RTSP stream.It provides 3 functions.
+RtspHelper is a useful utility based on FFmpegHelper to work with RTSP stream. It provides 3 functions.
 * Recording.recording a specify RTSP stream to a video file
 * Watermark.marking a picture watermark during recording.
 * Screenshot.screenshot once or set a timer.
@@ -24,7 +32,7 @@ RtspHelper is a useful utility based on FFmpegHelper to work with RTSP stream.It
 * Windows(x86,x64)
 * macOS(x64)
 
-This package is based on FFmpeg v4.4.1.Resources under [ffmpeg_v4.1.1](ffmpeg_v4.1.1) are from [FFmpeg officical Website](http://ffmpeg.org/download.html).You can download a newer version and replace it in the project.We are using the official shared version of ffmpeg package.
+This package is based on FFmpeg v4.1.4 Resources under [ffmpeg_v4.1.4](ffmpeg_v4.1.4) are from [FFmpeg officical Website](http://ffmpeg.org/download.html).You can download a newer version and replace it in the project.We are using the official shared version of ffmpeg package.
 
 Since Linux has so many different version branches,we don't support it yet.FFmpeg provides built packages for Debian/Ubuntu/Fedora and Redhat only.For other versions and custom requirements,you can build FFmpeg from its source code.So here we don't provide linux support.
 but we will handle it soon.

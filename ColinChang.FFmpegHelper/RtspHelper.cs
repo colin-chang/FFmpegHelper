@@ -57,7 +57,7 @@ namespace ColinChang.FFmpegHelper
 
             var beforeOutput = new Dictionary<string, string> {["-t"] = duration.ToString()};
 
-            return await FFmpegHelper.WatermarkVideo(Rtsp, outputFile, watermark, beforeInput, beforeOutput);
+            return await FFmpegHelper.WatermarkAsync(Rtsp, outputFile, watermark, beforeInput, beforeOutput);
         }
 
         /// <summary>

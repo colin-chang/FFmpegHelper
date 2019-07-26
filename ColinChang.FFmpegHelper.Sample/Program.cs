@@ -16,6 +16,10 @@ namespace ColinChang.FFmpegHelper.Sample
             //RecordAsync();
             //WatermarkAsync().Wait();
             //ScreenshotAsync().Wait();
+
+            //ConvertToAsync().Wait();
+            //ExtractVideoAsync().Wait();
+            ReplaceBackgroundColorAsync().Wait();
         }
 
         private static async Task RecordAsync()
@@ -63,6 +67,40 @@ namespace ColinChang.FFmpegHelper.Sample
                 Console.WriteLine("*************************************************************");
                 Console.WriteLine(e.Message);
             }
+        }
+
+        private static async Task ConvertToAsync()
+        {
+            var input = "/Users/zhangcheng/Desktop/macos64/src.mp4";
+            var output = "/Users/zhangcheng/Desktop/macos64/src-1.mp4";
+
+            await FFmpegHelper.ConvertToAsync(input, output, TimeSpan.FromSeconds(5));
+        }
+
+        private static async Task ExtractVideoAsync()
+        {
+            var input = "/Users/zhangcheng/Desktop/macos64/src.mp4";
+            var output = "/Users/zhangcheng/Desktop/macos64/src-2.mp4";
+
+            await FFmpegHelper.ExtractVideoAsync(input, output, TimeSpan.Parse("00:01:04"), TimeSpan.Parse("00:01:13"));
+        }
+
+        private static async Task ReplaceBackgroundColorAsync()
+        {
+            var input = "/Users/zhangcheng/Desktop/macos64/src.mp4";
+            var output = "/Users/zhangcheng/Desktop/macos64/src-3.mp4";
+            await FFmpegHelper.ReplaceBackgroundAsync(input, output, "70de77", 0.1f, 0.2f, "000000", 640, 480,
+                TimeSpan.FromSeconds(10));
+        }
+
+        private static async Task ReplaceBackgroundAsync()
+        {
+            var input = "/Users/zhangcheng/Desktop/macos64/src.mp4";
+            var output = "/Users/zhangcheng/Desktop/macos64/src-3.mp4";
+            var background = "/Users/zhangcheng/Desktop/macos64/bg.mp4";
+
+            await FFmpegHelper.ReplaceBackgroundAsync(input, output, "70de77", 0.1f, 0.2f, background,
+                TimeSpan.FromSeconds(10));
         }
     }
 }
