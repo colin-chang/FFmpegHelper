@@ -42,5 +42,5 @@ If you wanna extend Linux support,just edit [this place](https://github.com/coli
 ## Principle
 We just packaged a library to transfer command to FFmpeg CLI.It's useful and simiple,except this,you also can use the FFmpeg API to use it for development.FFmpeg SDK only provide for baisc language like C.
 
-## Guid
+## Guide
 Check the [sample project](https://github.com/colin-chang/FFmpegHelper/tree/master/ColinChang.FFmpegHelper.Sample) to see how to use it easily.
