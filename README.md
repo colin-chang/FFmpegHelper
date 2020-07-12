@@ -32,7 +32,7 @@ RtspHelper is a useful utility based on FFmpegHelper to work with RTSP stream. I
 * Windows(x86,x64)
 * macOS(x64)
 
-This package is based on FFmpeg v4.1.4 Resources under [ffmpeg_v4.1.4](ffmpeg_v4.1.4) are from [FFmpeg officical Website](http://ffmpeg.org/download.html).You can download a newer version and replace it in the project.We are using the official shared version of ffmpeg package.
+This package is based on FFmpeg v4.3 Resources under [ffmpeg_v4.3](ffmpeg_v4.3) are from [FFmpeg officical Website](http://ffmpeg.org/download.html).You can download a newer version and replace it in the project.We are using the official shared version of ffmpeg package.
 
 Since Linux has so many different version branches,we don't support it yet.FFmpeg provides built packages for Debian/Ubuntu/Fedora and Redhat only.For other versions and custom requirements,you can build FFmpeg from its source code.So here we don't provide linux support.
 but we will handle it soon.

@@ -113,13 +113,18 @@ namespace ColinChang.FFmpegHelper
             if (from >= to)
                 throw new ArgumentException("start time(from) must be less than end time(to).");
 
-            var beforeOutput = new Dictionary<string, string>
+            var beforeInput = new Dictionary<string, string>
             {
                 ["-ss"] = from.ToString(),
-                ["-c"] = "copy",
                 ["-to"] = to.ToString()
             };
-            return await ExecuteFfmpegAsync(input, output, null, beforeOutput);
+
+            var beforeOutput = new Dictionary<string, string>
+            {
+                ["-vcodec"] = "copy",
+                ["-acodec"] = "copy"
+            };
+            return await ExecuteFfmpegAsync(input, output, beforeInput, beforeOutput);
         }
 
         /// <summary>
@@ -136,7 +141,8 @@ namespace ColinChang.FFmpegHelper
         /// <param name="duration">how long time of the output video</param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public static async Task<bool> ReplaceBackgroundAsync(string input, string output, string color, float similarity,
+        public static async Task<bool> ReplaceBackgroundAsync(string input, string output, string color,
+            float similarity,
             float blend, string backgroundColor, int width, int height, TimeSpan? duration = null)
         {
             if (string.IsNullOrWhiteSpace(color))
@@ -189,7 +195,8 @@ namespace ColinChang.FFmpegHelper
         /// <param name="background">background video or picture</param>
         /// <param name="duration">how long time of the output video</param>
         /// <returns></returns>
-        public static async Task<bool> ReplaceBackgroundAsync(string input, string output, string color, float similarity,
+        public static async Task<bool> ReplaceBackgroundAsync(string input, string output, string color,
+            float similarity,
             float blend, string background, TimeSpan? duration = null)
         {
             if (string.IsNullOrWhiteSpace(color))
@@ -254,7 +261,7 @@ namespace ColinChang.FFmpegHelper
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 return Task.Run(() => ShellHelper.ShellHelper.ExecuteFile("ffmpeg.bat",
-                    $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.1.4", Environment.Is64BitOperatingSystem ? "win64" : "win32")} {inputParameters} {input} {outputParameters} {output}",
+                    $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.3", Environment.Is64BitOperatingSystem ? "win64" : "win32")} {inputParameters} {input} {outputParameters} {output}",
                     true));
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
@@ -263,7 +270,7 @@ namespace ColinChang.FFmpegHelper
                     throw new NotSupportedException("only 64bit macOS is supported");
 
                 return Task.Run(() => ShellHelper.ShellHelper.ExecuteFile("ffmpeg.sh",
-                    $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.1.4", "macos64")} {inputParameters} {input} {outputParameters} {output}",
+                    $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.3", "macos64")} {inputParameters} {input} {outputParameters} {output}",
                     true));
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))

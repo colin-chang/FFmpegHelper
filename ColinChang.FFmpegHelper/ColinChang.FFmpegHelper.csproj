@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Description>This is a common utility that can help you to run most of ffmpeg commands.It contains a RTSP helper that can recorder a video from RTSP stream.Plus it can use watermark and screenshot.Windows(x64,x86) and macOS are supported currently,Linux will be supported soon.</Description>
     <Authors>Colin Chang</Authors>
-    <Copyright>https://colin-chang.site/</Copyright>
+    <Copyright>https://ccstudio.org/</Copyright>
     <PackageProjectUrl>https://github.com/colin-chang/FFmpegHelper</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/colin-chang/FFmpegHelper/master/ffmpeg.ico</PackageIconUrl>
     <RepositoryUrl>https://github.com/colin-chang/FFmpegHelper</RepositoryUrl>
@@ -12,13 +12,15 @@
     <PackageTags>FFmpeg RSTP screenshot watermark ffmpeg converter extract background</PackageTags>
     <PackageLicenseUrl></PackageLicenseUrl>
     <Owners>Colin Chang</Owners>
-    <Version>1.3.1</Version>
-    <PackageReleaseNotes>1.update watermark method name
-2.add a function for videos converter
-3.add a function for extracting a segment from a video
-4.add functions for replacing videos background
-5.upgrade ffmpeg to v4.1.4</PackageReleaseNotes>
+    <Version>1.3.2</Version>
+    <PackageReleaseNotes>
+      1.update ExtractVideoAsync method
+      2.update dependencies
+      3.upgrade ffmpeg to v4.3
+      4.update framework to .net standard 2.1
+    </PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
 
 
@@ -33,103 +35,103 @@
     <Content Include="ffmpeg.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\macos64\ffmpeg">
+    <Content Include="ffmpeg_v4.3\macos64\ffmpeg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\macos64\ffplay">
+    <Content Include="ffmpeg_v4.3\macos64\ffplay">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\macos64\ffprobe">
+    <Content Include="ffmpeg_v4.3\macos64\ffprobe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\macos64\libavcodec.58.dylib">
+    <Content Include="ffmpeg_v4.3\macos64\libavcodec.58.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\macos64\libavdevice.58.dylib">
+    <Content Include="ffmpeg_v4.3\macos64\libavdevice.58.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\macos64\libavfilter.7.dylib">
+    <Content Include="ffmpeg_v4.3\macos64\libavfilter.7.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\macos64\libavformat.58.dylib">
+    <Content Include="ffmpeg_v4.3\macos64\libavformat.58.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\macos64\libavutil.56.dylib">
+    <Content Include="ffmpeg_v4.3\macos64\libavutil.56.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\macos64\libpostproc.55.dylib">
+    <Content Include="ffmpeg_v4.3\macos64\libpostproc.55.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\macos64\libswresample.3.dylib">
+    <Content Include="ffmpeg_v4.3\macos64\libswresample.3.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\macos64\libswscale.5.dylib">
+    <Content Include="ffmpeg_v4.3\macos64\libswscale.5.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win64\avcodec-58.dll">
+    <Content Include="ffmpeg_v4.3\win64\avcodec-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win64\avdevice-58.dll">
+    <Content Include="ffmpeg_v4.3\win64\avdevice-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win64\avfilter-7.dll">
+    <Content Include="ffmpeg_v4.3\win64\avfilter-7.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win64\avformat-58.dll">
+    <Content Include="ffmpeg_v4.3\win64\avformat-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win64\avutil-56.dll">
+    <Content Include="ffmpeg_v4.3\win64\avutil-56.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win64\ffmpeg.exe">
+    <Content Include="ffmpeg_v4.3\win64\ffmpeg.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win64\ffplay.exe">
+    <Content Include="ffmpeg_v4.3\win64\ffplay.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win64\ffprobe.exe">
+    <Content Include="ffmpeg_v4.3\win64\ffprobe.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win64\postproc-55.dll">
+    <Content Include="ffmpeg_v4.3\win64\postproc-55.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win64\swresample-3.dll">
+    <Content Include="ffmpeg_v4.3\win64\swresample-3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win64\swscale-5.dll">
+    <Content Include="ffmpeg_v4.3\win64\swscale-5.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win32\avcodec-58.dll">
+    <Content Include="ffmpeg_v4.3\win32\avcodec-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win32\avdevice-58.dll">
+    <Content Include="ffmpeg_v4.3\win32\avdevice-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win32\avfilter-7.dll">
+    <Content Include="ffmpeg_v4.3\win32\avfilter-7.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win32\avformat-58.dll">
+    <Content Include="ffmpeg_v4.3\win32\avformat-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win32\avutil-56.dll">
+    <Content Include="ffmpeg_v4.3\win32\avutil-56.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win32\ffmpeg.exe">
+    <Content Include="ffmpeg_v4.3\win32\ffmpeg.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win32\ffplay.exe">
+    <Content Include="ffmpeg_v4.3\win32\ffplay.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win32\ffprobe.exe">
+    <Content Include="ffmpeg_v4.3\win32\ffprobe.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win32\postproc-55.dll">
+    <Content Include="ffmpeg_v4.3\win32\postproc-55.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win32\swresample-3.dll">
+    <Content Include="ffmpeg_v4.3\win32\swresample-3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.1.4\win32\swscale-5.dll">
+    <Content Include="ffmpeg_v4.3\win32\swscale-5.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
