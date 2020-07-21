@@ -261,7 +261,7 @@ namespace ColinChang.FFmpegHelper
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 return Task.Run(() => ShellHelper.ShellHelper.ExecuteFile("ffmpeg.bat",
-                    $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.3", Environment.Is64BitOperatingSystem ? "win64" : "win32")} {inputParameters} {input} {outputParameters} {output}",
+                    $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"runtimes", Environment.Is64BitOperatingSystem ? "win-x64" : "win-x86","lib")} {inputParameters} {input} {outputParameters} {output}",
                     true));
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
@@ -270,7 +270,7 @@ namespace ColinChang.FFmpegHelper
                     throw new NotSupportedException("only 64bit macOS is supported");
 
                 return Task.Run(() => ShellHelper.ShellHelper.ExecuteFile("ffmpeg.sh",
-                    $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg_v4.3", "macos64")} {inputParameters} {input} {outputParameters} {output}",
+                    $"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory ,"runtimes", "osx-x64","lib")} {inputParameters} {input} {outputParameters} {output}",
                     true));
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))

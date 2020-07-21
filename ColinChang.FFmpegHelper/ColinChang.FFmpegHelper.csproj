@@ -13,14 +13,13 @@
     <PackageLicenseUrl></PackageLicenseUrl>
     <Owners>Colin Chang</Owners>
     <Version>1.3.2</Version>
-    <PackageReleaseNotes>
-      1.update ExtractVideoAsync method
-      2.update dependencies
-      3.upgrade ffmpeg to v4.3
-      4.update framework to .net standard 2.1
-    </PackageReleaseNotes>
+    <PackageReleaseNotes>1.update ExtractVideoAsync method
+2.update dependencies
+3.upgrade ffmpeg to v4.3
+4.update framework to .net standard 2.1</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <LangVersion>8</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 
@@ -35,103 +34,103 @@
     <Content Include="ffmpeg.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\macos64\ffmpeg">
+    <Content Include="runtimes\osx-x64\lib\ffmpeg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\macos64\ffplay">
+    <Content Include="runtimes\osx-x64\lib\ffplay">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\macos64\ffprobe">
+    <Content Include="runtimes\osx-x64\lib\ffprobe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\macos64\libavcodec.58.dylib">
+    <Content Include="runtimes\osx-x64\lib\libavcodec.58.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\macos64\libavdevice.58.dylib">
+    <Content Include="runtimes\osx-x64\lib\libavdevice.58.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\macos64\libavfilter.7.dylib">
+    <Content Include="runtimes\osx-x64\lib\libavfilter.7.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\macos64\libavformat.58.dylib">
+    <Content Include="runtimes\osx-x64\lib\libavformat.58.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\macos64\libavutil.56.dylib">
+    <Content Include="runtimes\osx-x64\lib\libavutil.56.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\macos64\libpostproc.55.dylib">
+    <Content Include="runtimes\osx-x64\lib\libpostproc.55.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\macos64\libswresample.3.dylib">
+    <Content Include="runtimes\osx-x64\lib\libswresample.3.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\macos64\libswscale.5.dylib">
+    <Content Include="runtimes\osx-x64\lib\libswscale.5.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win64\avcodec-58.dll">
+    <Content Include="runtimes\win-x86\lib\avcodec-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win64\avdevice-58.dll">
+    <Content Include="runtimes\win-x86\lib\avdevice-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win64\avfilter-7.dll">
+    <Content Include="runtimes\win-x86\lib\avfilter-7.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win64\avformat-58.dll">
+    <Content Include="runtimes\win-x86\lib\avformat-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win64\avutil-56.dll">
+    <Content Include="runtimes\win-x86\lib\avutil-56.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win64\ffmpeg.exe">
+    <Content Include="runtimes\win-x86\lib\ffmpeg.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win64\ffplay.exe">
+    <Content Include="runtimes\win-x86\lib\ffplay.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win64\ffprobe.exe">
+    <Content Include="runtimes\win-x86\lib\ffprobe.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win64\postproc-55.dll">
+    <Content Include="runtimes\win-x86\lib\postproc-55.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win64\swresample-3.dll">
+    <Content Include="runtimes\win-x86\lib\swresample-3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win64\swscale-5.dll">
+    <Content Include="runtimes\win-x86\lib\swscale-5.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win32\avcodec-58.dll">
+    <Content Include="runtimes\win-x64\lib\avcodec-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win32\avdevice-58.dll">
+    <Content Include="runtimes\win-x64\lib\avdevice-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win32\avfilter-7.dll">
+    <Content Include="runtimes\win-x64\lib\avfilter-7.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win32\avformat-58.dll">
+    <Content Include="runtimes\win-x64\lib\avformat-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win32\avutil-56.dll">
+    <Content Include="runtimes\win-x64\lib\avutil-56.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win32\ffmpeg.exe">
+    <Content Include="runtimes\win-x64\lib\ffmpeg.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win32\ffplay.exe">
+    <Content Include="runtimes\win-x64\lib\ffplay.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win32\ffprobe.exe">
+    <Content Include="runtimes\win-x64\lib\ffprobe.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win32\postproc-55.dll">
+    <Content Include="runtimes\win-x64\lib\postproc-55.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win32\swresample-3.dll">
+    <Content Include="runtimes\win-x64\lib\swresample-3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ffmpeg_v4.3\win32\swscale-5.dll">
+    <Content Include="runtimes\win-x64\lib\swscale-5.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -141,5 +140,11 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="runtimes\osx-x64" />
+    <Folder Include="runtimes\win-x64" />
+    <Folder Include="runtimes\win-x86" />
   </ItemGroup>
 </Project>
